@@ -1,9 +1,12 @@
 const express = require('express');
+const morgan = require('morgan');
 const { success } = require('./helper');
 const pokemons = require('./mock-pokemon');
 
 const app = express();
 const port = 3000;
+
+app.use(morgan('dev'));
 
 app.get('/', (req, res) => res.send('Hello, Express! 😄'));
 

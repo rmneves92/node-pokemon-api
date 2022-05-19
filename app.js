@@ -1,13 +1,17 @@
 const express = require('express');
 const morgan = require('morgan');
 const favicon = require('serve-favicon');
+const bodyParser = require('body-parser');
 const { success, getUniqueId } = require('./helper');
 const pokemons = require('./mock-pokemon');
 
 const app = express();
 const port = 3000;
 
-app.use(favicon(__dirname + '/favicon.ico')).use(morgan('dev'));
+app
+  .use(favicon(__dirname + '/favicon.ico'))
+  .use(morgan('dev'))
+  .use(bodyParser.json());
 
 app.get('/', (req, res) => res.send('Hello, Express! 😄'));
 
@@ -25,6 +29,7 @@ app.get('/api/pokemons/:id', (req, res) => {
 });
 
 app.post('/api/pokemons', (req, res) => {
+  console.log(req, res);
   const id = getUniqueId(pokemons);
   const pokemonCreated = { ...req.body, ...{ id: id, created: new Date() } };
   pokemons.push(pokemonCreated);

@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const favicon = require('serve-favicon');
 const bodyParser = require('body-parser');
 const { success, getUniqueId } = require('./helper');
-const pokemons = require('./mock-pokemon');
+let pokemons = require('./mock-pokemon');
 
 const app = express();
 const port = 3000;
